@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jaime
@@ -57,9 +59,19 @@ public class Ejercicio extends javax.swing.JFrame {
         jPanel1.add(txtFotos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, -1));
 
         cmdCalcular.setText("Calcular");
+        cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCalcularActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
 
         jLabel4.setText("Monto a pagar");
@@ -89,11 +101,35 @@ public class Ejercicio extends javax.swing.JFrame {
     private void txtFotosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFotosKeyTyped
 
     char c=evt.getKeyChar();
-        if(!Character.isDigit(c)) {
+        if(!Character.isDigit(c)) { 
             getToolkit().beep();
             evt.consume();
         }  
     }//GEN-LAST:event_txtFotosKeyTyped
+
+    private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
+
+        if(txtFotos.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Digite la cantidad de fotos ","ERROR",JOptionPane.ERROR_MESSAGE);
+            txtFotos.requestFocusInWindow();
+        }else{
+            
+            double nf=Double.parseDouble(txtFotos.getText());
+            double v=nf*15.000;
+            double iva=((v*16)/100)+v;
+            
+            lblMonto.setText(""+iva);
+            
+        }
+    }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+
+        txtFotos.setText("");
+        lblMonto.setText("");
+        
+        txtFotos.requestFocusInWindow();
+    }//GEN-LAST:event_cmdBorrarActionPerformed
 
     /**
      * @param args the command line arguments
